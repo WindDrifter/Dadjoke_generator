@@ -6,3 +6,4 @@ lib/
 var/
 node_modules/
 .git/
+package-lock.json
