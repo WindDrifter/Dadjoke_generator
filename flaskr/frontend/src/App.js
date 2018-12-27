@@ -16,16 +16,14 @@ class App extends Component {
 
       <div className="App">
         <header className="App-header">
-          <Link to="/"> Home </Link>
-          <Link to="/getDadJoke"> Get random joke </Link>
+          <Link className="headerlinks" to="/"> Home </Link>
+          <Link className="headerlinks" to="/getDadJoke"> Get random joke </Link>
         </header>
-        <div>
-          <Switch>
-            <Route exact path="/" component={MainComponent} />
-            <Route exact path="/getDadJoke" component={Dadjoke} />
-            <Route exact path={`/getDadJoke/:id`} component={Dadjoke} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/" component={MainComponent} />
+          <Route exact path="/getDadJoke" component={Dadjoke} />
+          <Route exact path={`/getDadJoke/:id`} component={Dadjoke} />
+        </Switch>
 
       </div>
       </Router>

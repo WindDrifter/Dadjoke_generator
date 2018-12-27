@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import '../App.css';
+
 class MainComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {joke_id: "", redirect: false, "url": ""};
     this.submitRequest = this.submitRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.redirectToGenerator = this.redirectToGenerator.bind(this);
+  }
+  redirectToGenerator(event){
+    event.preventDefault();
+    this.state.redirect = true;
+    this.state.url = `/getDadJoke`;
+    this.props.history.push(this.state.url);
+    this.forceUpdate();
   }
   submitRequest(event){
     event.preventDefault();
@@ -27,11 +37,11 @@ class MainComponent extends React.Component {
     else{
 
       return (
-        <div>
-          <h2>Welcome to dadjoke generator, Click get random joke to get started</h2>
-            <Link to="/getDadJoke"> Get random joke </Link>
+        <div id="mainpagediv">
+          <h2 className="Title">Welcome to dadjoke generator, Click get random joke to get started</h2>
+            <button onClick={this.redirectToGenerator}> Get random joke </button>
             <h3> OR </h3>
-          <h2>If you know a joke id, please enter here</h2>
+          <h2 className="Title">If you know a joke id, please enter here</h2>
           <form className="userform">
             <label id="joke_id">
               <input type="text" key="joke_id" name="joke_id" onChange={this.handleChange} value={this.state.joke_id}/>

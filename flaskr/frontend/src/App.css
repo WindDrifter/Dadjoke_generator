@@ -1,5 +1,17 @@
+
+body{
+  height:100vh;
+
+}
+
+#root{
+  height: 100%;
+}
+
 .App {
   text-align: center;
+  height: 100%;
+  background-color: aqua;
 }
 
 .App-logo {
@@ -8,7 +20,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: Grey;
+  height: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,16 +29,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.headerlinks{
+  color: Blue;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mainComponentDiv{
+  background-color: aqua;
 }
