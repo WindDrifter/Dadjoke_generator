@@ -1,56 +1,51 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import '../App.css';
 
-class MainComponent extends React.Component {
+class MainComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {joke_id: "", redirect: false, "url": ""};
+    this.state = {joke_id: "", "url": ""};
     this.submitRequest = this.submitRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    debugger;
+    this.changeURL = this.props.changeURL;
     this.redirectToGenerator = this.redirectToGenerator.bind(this);
   }
   redirectToGenerator(event){
     event.preventDefault();
-    this.state.redirect = true;
-    this.state.url = `/getDadJoke`;
-    this.props.history.push(this.state.url);
+    this.props.history.push(`/getDadJoke`);
+    this.changeURL(`/getDadJoke`);
+
     this.forceUpdate();
   }
   submitRequest(event){
     event.preventDefault();
-    this.state.redirect = true;
-    this.state.url = `/getDadJoke/${this.state.joke_id}`;
-    this.props.history.push(this.state.url);
+    this.props.history.push(`/getDadJoke/${this.state.joke_id}`);
+    this.changeURL(`/getDadJoke/${this.state.joke_id}`);
     this.forceUpdate();
   }
   handleChange(event){
-    event.preventDefault();
     this.setState({"joke_id": event.target.value});
   }
   render () {
-    const redirect = this.state.redirect;
-    if(redirect){
-      return (<Redirect to={`${this.state.url}`} />);
-    }
-    else{
+
 
       return (
         <div id="mainpagediv">
           <h2 className="Title">Welcome to dadjoke generator, Click get random joke to get started</h2>
-            <button onClick={this.redirectToGenerator}> Get random joke </button>
+            <button id="maingen" onClick={this.redirectToGenerator}> Get random joke </button>
             <h3> OR </h3>
           <h2 className="Title">If you know a joke id, please enter here</h2>
           <form className="userform">
             <label id="joke_id">
-              <input type="text" key="joke_id" name="joke_id" onChange={this.handleChange} value={this.state.joke_id}/>
+              <input type="text" id="jokeIdText" key="joke_id" name="joke_id" onChange={this.handleChange} value={this.state.joke_id}/>
             </label>
-            <input type="submit" onClick={this.submitRequest} value="Submit" />
+            <input id="submitWJokeId" type="submit" onClick={this.submitRequest} value="Submit" />
           </form>
         </div>
       );
-    }
+
   }
 }
 

@@ -1,4 +1,3 @@
-from ...__init__ import create_app
 from ...database import mongo
 import pytest
 import json
@@ -7,17 +6,14 @@ import random
 from faker import Faker
 import random
 fake = Faker()
-@pytest.fixture
-def app():
-    app = create_app(testing=True)
-    return app
+
 # Clearing out DB after each test case
 @pytest.fixture(autouse=True)
 def reset_db():
     mongo.db.jokes.drop()
 
 def clear_entry(joke_id):
-    mongo.db.jokes.remove({"joke_id":joke_id})
+    mongo.db.jokes.delete_one({"joke_id":joke_id})
 
 def get_pre_setjoke(joke_id = "R7UfaahVfFd", hate=False, meh=False):
     if hate:
@@ -90,13 +86,13 @@ class TestJoke:
         precount_hates = mongo.db.jokes.find_one({"joke_id": joke_id}).get("hates")
         rv = client.post('/api/dadjoke/%s'%(joke_id), data=json.dumps(pre_set_joke), content_type='application/json')
         postcount_hates = mongo.db.jokes.find_one({"joke_id": joke_id}).get("hates")
-        assert (postcount_likes - precount_likes ==1)
+        assert (postcount_hates - precount_hates ==1)
 
-    def test_hate_data_add_to_total_properly(self, client):
+    def test_meh_data_add_to_total_properly(self, client):
         joke_ids = generateRandomDataToDB()
         joke_id = joke_ids[1]
         pre_set_joke = get_pre_setjoke(joke_id=joke_id, meh=True)
         precount_meh = mongo.db.jokes.find_one({"joke_id": joke_id}).get("meh")
         rv = client.post('/api/dadjoke/%s'%(joke_id), data=json.dumps(pre_set_joke), content_type='application/json')
         postcount_meh = mongo.db.jokes.find_one({"joke_id": joke_id}).get("meh")
-        assert (postcount_likes - precount_likes ==1)
+        assert (postcount_meh - precount_meh ==1)

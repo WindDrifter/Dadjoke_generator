@@ -33,6 +33,3 @@ def create_app(test_config=None, testing=False):
     app.register_blueprint(dadjoke_router.dadjoke)
     mongo.init_app(app)
     return app
-
-if __name__=="__main__":
-    app.runt(debug=True)

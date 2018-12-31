@@ -7,3 +7,4 @@ var/
 node_modules/
 .git/
 package-lock.json
+__snapshots__

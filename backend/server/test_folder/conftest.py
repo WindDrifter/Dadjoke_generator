@@ -1,4 +1,4 @@
-from ...__init__ import create_app
+from ...app_create import create_app
 
 import pytest
 
