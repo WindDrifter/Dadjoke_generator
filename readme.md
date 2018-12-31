@@ -9,6 +9,15 @@
 NOTE TO INSTALL MONGO DB in local enviroment, follow this link:
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
+#### NOTE: Make sure your localmongo envirment is installed and running:
+###### Command for running mongo
+```
+$ mongod
+```
+
+### Once your mongo is running follow these steps:
+
+
 ##### First step - install vitrual enviroment
 
 ```
