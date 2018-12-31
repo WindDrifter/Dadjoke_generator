@@ -6,10 +6,16 @@ from bson.json_util import loads, dumps
 from pymongo import IndexModel, ASCENDING, DESCENDING
 
 def check_and_create_index():
+    # checking if index is created
+    # if not then it will create index for joke_id and make sure it's unique
     if mongo.db.jokes.count_documents({}) == 0:
         mongo.db.jokes.create_index([("joke_id",ASCENDING)], unique=True)
 
 def save_joke(data={}, joke_id=""):
+    # saving joke_id and its stats to database
+    # it will try to find if the joke_id
+    # existed in database
+    # if not then it will create a dummy datafile for it to save on
     check_and_create_index()
     joke_data = get_joke(joke_id=joke_id, from_saving=True)
     if data.get("like"):
@@ -29,6 +35,9 @@ def save_joke(data={}, joke_id=""):
 
 
 def get_joke(joke_id="", from_saving=False):
+    # getting joke
+    # if from_saving is off (not from saving_joke function) and id not found
+    # it will return an error instead of a dummy structure
     check_and_create_index()
     result = ""
     if joke_id:
